@@ -1,0 +1,20 @@
+---
+- name: Disable dev macOS
+  hosts: macs
+  tasks:
+    - name: install packages 	
+      community.general.homebrew:
+        state: present
+        formula:
+          - wget
+          - yt-dlp
+          - go
+
+    - name: iNSTALL CASKS
+      community.general.homebrew_cask:
+        state: present
+        cask: 
+          - goland
+          - setapp
+          - rapidapi
+          - github-copilot-for-xcode

@@ -1,0 +1,56 @@
+---
+- name: Disable dev macOS
+  hosts: macs
+  tasks:
+    - name: install packages 	
+      community.general.homebrew:
+        state: present
+        formula:
+          - wget
+          - yt-dlp
+          - go
+          - kubectl
+
+    - name: iNSTALL CASKS
+      community.general.homebrew_cask:
+        state: present
+        cask: 
+          - goland
+          - setapp
+          - rapidapi
+          - github-copilot-for-xcode
+          - telegram-desktop
+          - iterm2
+          - visual-studio-code
+          - headlamp
+   
+    - name: git config user
+      git_config:
+        name: user.name
+        scope: global
+        value: Alice Di Nunno   
+
+    - name: git config mail
+      git_config:
+        name: user.email
+        scope: global
+        value: alice@dinunno.fr
+
+    - name: git config branch
+      git_config:
+        name: init.defaultBranch
+        scope: global
+        value: main
+
+    - name: git config global git ignore
+      git_config:
+        name: core.excludesfile
+        scope: global
+        value: "~/.gitignore"
+
+
+    - name: Ensure the .gitignore file exists 
+      copy: 
+        dest: "{{ ansible_env.HOME }}/.gitignore"
+        content: | 
+          .DS_Store
