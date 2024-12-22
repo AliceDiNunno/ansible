@@ -22,7 +22,7 @@
           - telegram-desktop
           - iterm2
           - visual-studio-code
-          - headlamp
+          - vlc
    
     - name: git config user
       git_config:
